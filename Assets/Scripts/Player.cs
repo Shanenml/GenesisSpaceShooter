@@ -5,48 +5,43 @@ using UnityEngine;
 public class Player : MonoBehaviour
 
 {
-    // Variables
     [SerializeField]
     private float _speed = 4.5f;
     [SerializeField]
-    private GameObject _laserPrefab; 
-
-    // Start is called before the first frame update
+    private GameObject _laserPrefab;
+    [SerializeField]
+    private float _fireRate = 0.25f;
+    private float _canFire = -1f;
+    [SerializeField]
+    private int _lives = 3;
     void Start()
     {
         transform.position = new Vector3(0, 0, 0);
     }
 
-    // Update is called once per frame
     void Update()
-    {
-        CalcMovement();
+    {        
+        CalculateMovement();
 
-        //if I hit the space key
-        //spawn gameObject (laser)
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && Time.time > _canFire)
         {
-            // spawn laser object at player position, normal rotation
-            Instantiate(_laserPrefab, transform.position, Quaternion.identity);
+            FireLaser();
         }
     }
 
-    void CalcMovement()
+    void CalculateMovement()
     {
         float horizontalInput = Input.GetAxis("Horizontal");
         float verticalInput = Input.GetAxis("Vertical");
 
         Vector3 directioncom = new Vector3(horizontalInput, verticalInput, 0);
-        Vector3 topwall = new Vector3(transform.position.x, 0, 0);
-        Vector3 bottomwall = new Vector3(transform.position.x, -5f, 0);
         Vector3 rightwall = new Vector3(11.3f, transform.position.y, 0);
         Vector3 leftwall = new Vector3(-11.3f, transform.position.y, 0);
 
-
         transform.Translate(directioncom * _speed * Time.deltaTime);
 
-        //y axis clamp
         transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, -5, 0), 0);
+       
         if (transform.position.x >= 11.3f)
         {
             transform.position = leftwall;
@@ -54,6 +49,22 @@ public class Player : MonoBehaviour
         else if (transform.position.x <= -11.3f)
         {
             transform.position = rightwall;
+        }
+    }
+
+    void FireLaser()
+    {
+        _canFire = Time.time + _fireRate;
+        Instantiate(_laserPrefab, transform.position + new Vector3(0, 0.8f, 0), Quaternion.identity);
+    }
+
+    public void Damage()
+    {
+        _lives--;
+
+        if(_lives < 1)
+        {
+            Destroy(this.gameObject);
         }
     }
 
