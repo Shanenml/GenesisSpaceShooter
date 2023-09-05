@@ -6,8 +6,7 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField]
     private float _speed = 4.0f;
-    [SerializeField]
-    private GameObject _laserPrefab;
+   
 
     void Start()
     {
