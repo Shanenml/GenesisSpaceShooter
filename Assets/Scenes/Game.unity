@@ -152,6 +152,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyPrefab: {fileID: 8943089604093542267, guid: a3be454961599eb49a94496e4bf2f9c0,
     type: 3}
+  _tripleshotpowerupPrefab: {fileID: 7825446631037730704, guid: fb67ada214313fb4ab9bf55dcdd67442,
+    type: 3}
   _enemyContainer: {fileID: 1296057610}
 --- !u!4 &103524886
 Transform:
@@ -583,79 +585,69 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.0064158, y: 4.172399}
   m_EdgeRadius: 0
---- !u!1001 &5288521252215658558
+--- !u!1001 &7825446630180355708
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5288521253338327080, guid: fb67ada214313fb4ab9bf55dcdd67442,
+    - target: {fileID: 7825446631037730701, guid: fb67ada214313fb4ab9bf55dcdd67442,
         type: 3}
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 5288521253338327080, guid: fb67ada214313fb4ab9bf55dcdd67442,
+    - target: {fileID: 7825446631037730701, guid: fb67ada214313fb4ab9bf55dcdd67442,
         type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5288521253338327080, guid: fb67ada214313fb4ab9bf55dcdd67442,
+    - target: {fileID: 7825446631037730701, guid: fb67ada214313fb4ab9bf55dcdd67442,
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 2.75
       objectReference: {fileID: 0}
-    - target: {fileID: 5288521253338327080, guid: fb67ada214313fb4ab9bf55dcdd67442,
+    - target: {fileID: 7825446631037730701, guid: fb67ada214313fb4ab9bf55dcdd67442,
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5288521253338327080, guid: fb67ada214313fb4ab9bf55dcdd67442,
+    - target: {fileID: 7825446631037730701, guid: fb67ada214313fb4ab9bf55dcdd67442,
         type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 5288521253338327080, guid: fb67ada214313fb4ab9bf55dcdd67442,
+    - target: {fileID: 7825446631037730701, guid: fb67ada214313fb4ab9bf55dcdd67442,
         type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5288521253338327080, guid: fb67ada214313fb4ab9bf55dcdd67442,
+    - target: {fileID: 7825446631037730701, guid: fb67ada214313fb4ab9bf55dcdd67442,
         type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5288521253338327080, guid: fb67ada214313fb4ab9bf55dcdd67442,
+    - target: {fileID: 7825446631037730701, guid: fb67ada214313fb4ab9bf55dcdd67442,
         type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5288521253338327080, guid: fb67ada214313fb4ab9bf55dcdd67442,
+    - target: {fileID: 7825446631037730701, guid: fb67ada214313fb4ab9bf55dcdd67442,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5288521253338327080, guid: fb67ada214313fb4ab9bf55dcdd67442,
+    - target: {fileID: 7825446631037730701, guid: fb67ada214313fb4ab9bf55dcdd67442,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5288521253338327080, guid: fb67ada214313fb4ab9bf55dcdd67442,
+    - target: {fileID: 7825446631037730701, guid: fb67ada214313fb4ab9bf55dcdd67442,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5288521253338327083, guid: fb67ada214313fb4ab9bf55dcdd67442,
-        type: 3}
-      propertyPath: m_SortingLayer
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5288521253338327083, guid: fb67ada214313fb4ab9bf55dcdd67442,
-        type: 3}
-      propertyPath: m_SortingLayerID
-      value: 258587989
-      objectReference: {fileID: 0}
-    - target: {fileID: 5288521253338327084, guid: fb67ada214313fb4ab9bf55dcdd67442,
+    - target: {fileID: 7825446631037730704, guid: fb67ada214313fb4ab9bf55dcdd67442,
         type: 3}
       propertyPath: m_Name
       value: Triple_Shot_Powerup
