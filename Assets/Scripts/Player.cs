@@ -6,23 +6,26 @@ public class Player : MonoBehaviour
 
 {
     [SerializeField]
-    private float _speed = 4.5f;
+    private float _speed = 5f;
     [SerializeField]
-    private GameObject _laserPrefab;
-    [SerializeField]
-    private GameObject _tripleShotPrefab;
+    private float _speedboostmult = 2f;
     [SerializeField]
     private float _fireRate = 0.25f;
     private float _canFire = -1f;
     [SerializeField]
     private int _lives = 3;
-    
+
+    [SerializeField]
+    private GameObject _laserPrefab;
+    [SerializeField]
+    private GameObject _tripleShotPrefab;
 
     private SpawnManager _spawnManager;
 
-    //variable for isTripleShotActive
     [SerializeField]
     private bool _isTripleShotActive = false;
+    [SerializeField]
+    private bool _isSpeedBoostActive = false;
 
     void Start()
     {
@@ -71,8 +74,6 @@ public class Player : MonoBehaviour
     void FireLaser()
     {
         _canFire = Time.time + _fireRate;
-
-        //Instantiate Triple Shot prefab if active
         if(_isTripleShotActive == true)
         {
             Instantiate(_tripleShotPrefab, transform.position, Quaternion.identity);
@@ -96,18 +97,28 @@ public class Player : MonoBehaviour
 
     public void TripleShotActive()
     {
-        //Make Triple Shot Power Up true
-        //Start the power down coroutine for triple shot
         _isTripleShotActive = true;
         StartCoroutine(TripleShotPowerDownRoutine());
     }
 
-    //IEnumerator coroutine
-    //Wait 5 seconds, then set the triple shot to false
+
     IEnumerator TripleShotPowerDownRoutine()
     {
         yield return new WaitForSeconds(5.0f);
         _isTripleShotActive = false;
     }
  
+    public void SpeedBoostActive()
+    {
+        _isSpeedBoostActive = true;
+        _speed *= _speedboostmult;
+        StartCoroutine(SpeedBoostPowerDown());
+    }
+
+    IEnumerator SpeedBoostPowerDown()
+    {
+        yield return new WaitForSeconds(5.0f);
+        _isSpeedBoostActive = false;
+        _speed /= _speedboostmult;
+    }
 }
