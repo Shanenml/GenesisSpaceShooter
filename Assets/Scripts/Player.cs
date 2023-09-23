@@ -60,7 +60,9 @@ public class Player : MonoBehaviour
         {
             FireLaser();
         }
+
     }
+
 
     void CalculateMovement()
     {
@@ -115,7 +117,7 @@ public class Player : MonoBehaviour
         {
            _spawnManager.OnPlayerDeath();
             Destroy(this.gameObject);
-            _uiManager.GameOverText();
+            _uiManager.GameOverSequence();
         }
     }
 
