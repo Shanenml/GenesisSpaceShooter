@@ -23,6 +23,12 @@ public class Player : MonoBehaviour
     private GameObject _tripleShotPrefab;
     [SerializeField]
     private GameObject _shieldPlayer;
+    [SerializeField]
+    private GameObject _rightEngine, _leftEngine;
+ 
+    [SerializeField]
+    private AudioClip _laserSound;
+    private AudioSource  _audioSource;
 
     private SpawnManager _spawnManager;
     private UIManager _uiManager;
@@ -30,16 +36,15 @@ public class Player : MonoBehaviour
     [SerializeField]
     private bool _isTripleShotActive = false;
     [SerializeField]
-    private bool _isSpeedBoostActive = false;
-    [SerializeField]
     private bool _isShieldActive = false;
 
 
     void Start()
     {
-       transform.position = new Vector3(0, 0, 0);
+       transform.position = new Vector3(0, -4f, 0);
         _spawnManager = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();
         _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
+        _audioSource = GetComponent<AudioSource>();
 
         if (_spawnManager == null)
         {
@@ -49,7 +54,14 @@ public class Player : MonoBehaviour
         {
             Debug.LogError("UI Manager is NULL");
         }
-
+        if (_audioSource == null)
+        {
+            Debug.LogError("Audio Source is NULL");
+        }
+        else
+        {
+            _audioSource.clip = _laserSound;
+        }
     }
 
     void Update()
@@ -75,7 +87,7 @@ public class Player : MonoBehaviour
 
         transform.Translate(directioncom * _speed * Time.deltaTime);
 
-        transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, -5, 0), 0);
+        transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, -5, 2), 0);
        
         if (transform.position.x >= 11.3f)
         {
@@ -98,6 +110,9 @@ public class Player : MonoBehaviour
         {
             Instantiate(_laserPrefab, transform.position + new Vector3(0, 1.1f, 0), Quaternion.identity);
         }
+
+        _audioSource.Play();
+        //play laser audio clip
     }
 
     public void Damage()
@@ -113,7 +128,15 @@ public class Player : MonoBehaviour
         _lives--;
         _uiManager.UpdateLives(_lives);
 
-        if(_lives < 1)
+        if(_lives == 2)
+        {
+            _rightEngine.SetActive(true);
+        }
+        else if(_lives == 1)
+        {
+            _leftEngine.SetActive(true);
+        }
+        else if(_lives < 1)
         {
            _spawnManager.OnPlayerDeath();
             Destroy(this.gameObject);
@@ -136,7 +159,6 @@ public class Player : MonoBehaviour
  
     public void SpeedBoostActive()
     {
-        _isSpeedBoostActive = true;
         _speed *= _speedboostmult;
         StartCoroutine(SpeedBoostPowerDown());
     }
@@ -144,7 +166,6 @@ public class Player : MonoBehaviour
     IEnumerator SpeedBoostPowerDown()
     {
         yield return new WaitForSeconds(5.0f);
-        _isSpeedBoostActive = false;
         _speed /= _speedboostmult;
     }
 

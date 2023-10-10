@@ -35,7 +35,7 @@ public class Enemy : MonoBehaviour
 
         transform.Translate(Vector3.down * _speed * Time.deltaTime);
 
-        if(transform.position.y < -8.5f)
+        if(transform.position.y < -12.5f)
         {
             float randomX = Random.Range(-8f, 8f);
             transform.position = new Vector3(randomX, 7, 0);
@@ -56,7 +56,6 @@ public class Enemy : MonoBehaviour
             }
             //trigger anim
             _destroyAnim.SetTrigger("OnEnemyDeath");
-            _speed = 0f;
             Destroy(this.gameObject, 2.5f);
         }
 
