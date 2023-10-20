@@ -8,9 +8,11 @@ public class PowerUp : MonoBehaviour
     private float _speed = 3.0f;
     [SerializeField]
     private int powerupID;
-        //0 = Triple Shot
-        //1 = Speed
-        //2 = Shields
+    //0 = Triple Shot
+    //1 = Speed
+    //2 = Shields
+    [SerializeField]
+    private AudioClip _powerupSound;
 
     void Start()
     {
@@ -49,6 +51,7 @@ public class PowerUp : MonoBehaviour
                     break;
             }
 
+            AudioSource.PlayClipAtPoint(_powerupSound, transform.position);
             Destroy(this.gameObject);
         }
     }

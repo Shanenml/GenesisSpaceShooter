@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Laser : MonoBehaviour
+public class Laser_Enemy : MonoBehaviour
 {
     [SerializeField]
     private float _speed = 8.0f;
@@ -14,7 +14,7 @@ public class Laser : MonoBehaviour
     }
     void CalculateMovement()
     {
-        transform.Translate(Vector3.up * _speed * Time.deltaTime);
+        transform.Translate(Vector3.down * _speed * Time.deltaTime);
 
         if (transform.position.y >= 8.0f)
         {
@@ -25,6 +25,17 @@ public class Laser : MonoBehaviour
 
             Destroy(this.gameObject);
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        Player player = other.transform.GetComponent<Player>();
+        if(player != null)
+        {
+            player.Damage();
+            Destroy(this.gameObject);
+        }
+        
     }
 
 }

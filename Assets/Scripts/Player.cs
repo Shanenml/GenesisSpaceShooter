@@ -25,10 +25,10 @@ public class Player : MonoBehaviour
     private GameObject _shieldPlayer;
     [SerializeField]
     private GameObject _rightEngine, _leftEngine;
- 
+
+    private AudioSource _audioSource;
     [SerializeField]
     private AudioClip _laserSound;
-    private AudioSource  _audioSource;
 
     private SpawnManager _spawnManager;
     private UIManager _uiManager;
@@ -56,7 +56,7 @@ public class Player : MonoBehaviour
         }
         if (_audioSource == null)
         {
-            Debug.LogError("Audio Source is NULL");
+            Debug.LogError("Audio Source on the Player is NULL");
         }
         else
         {
@@ -112,7 +112,7 @@ public class Player : MonoBehaviour
         }
 
         _audioSource.Play();
-        //play laser audio clip
+
     }
 
     public void Damage()
