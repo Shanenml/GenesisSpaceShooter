@@ -6,6 +6,8 @@ public class Laser : MonoBehaviour
 {
     [SerializeField]
     private float _speed = 8.0f;
+    [SerializeField]
+    private int laserID;
     
     void Update()
     {
@@ -14,9 +16,18 @@ public class Laser : MonoBehaviour
     }
     void CalculateMovement()
     {
-        transform.Translate(Vector3.up * _speed * Time.deltaTime);
+        switch(laserID)
+        {
+            case 0:
+                transform.Translate(Vector3.up * _speed * Time.deltaTime);
+                break;
+            case 1:
+                transform.Translate(Vector3.down * _speed * Time.deltaTime);
+                break;
+        }
+        
 
-        if (transform.position.y >= 8.0f)
+        if (transform.position.y >= 8.0f || transform.position.y <= -8.0f)
         {
             if(transform.parent != null)
             {

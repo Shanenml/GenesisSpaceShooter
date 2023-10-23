@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 4
-  _enemylaserPrefab: {fileID: 8188687951004084861, guid: e7be7a7e1c8a9fe499f011f6b8e485f0,
+  _enemylaserPrefab: {fileID: 7455805316744127840, guid: 5a9131a1473a4da48ba68dc0741c6a35,
     type: 3}
 --- !u!212 &5496265340404308335
 SpriteRenderer:

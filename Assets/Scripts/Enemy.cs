@@ -90,7 +90,11 @@ public class Enemy : MonoBehaviour
     IEnumerator FireLaserRoutine()
     {
         yield return new WaitForSeconds(Random.Range(1, 3));
-        Instantiate(_enemylaserPrefab, transform.position + new Vector3(0, -0.7f, 0), Quaternion.identity);
-
+        while(this.gameObject != null)
+        {
+            Instantiate(_enemylaserPrefab, transform.position, Quaternion.identity);
+            yield return new WaitForSeconds(3);
+        }
+        
     }
 }
