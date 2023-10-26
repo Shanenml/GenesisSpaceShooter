@@ -18,10 +18,11 @@ public class Laser : MonoBehaviour
     {
         switch(laserID)
         {
-            case 0:
+            case 0: //player laser
                 transform.Translate(Vector3.up * _speed * Time.deltaTime);
                 break;
-            case 1:
+
+            case 1: //enemy laser
                 transform.Translate(Vector3.down * _speed * Time.deltaTime);
                 break;
         }
@@ -33,9 +34,24 @@ public class Laser : MonoBehaviour
             {
                 Destroy(transform.parent.gameObject);
             }
+            Destroy(this.gameObject);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.tag == "Player" && laserID == 1)
+        {
+            Player player = other.transform.GetComponent<Player>();
+
+            if(player != null)
+            {
+                player.Damage();
+            }
 
             Destroy(this.gameObject);
         }
+        
     }
 
 }

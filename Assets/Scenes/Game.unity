@@ -1789,7 +1789,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 0.9547887
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0
@@ -1876,6 +1876,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Asteroid
+      objectReference: {fileID: 0}
+    - target: {fileID: 8009362769573779828, guid: 59d5df3f5dfecd64f9895f1fa13328f3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8213926213916692219, guid: 59d5df3f5dfecd64f9895f1fa13328f3,
         type: 3}
