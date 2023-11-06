@@ -33,7 +33,7 @@ public class Enemy : MonoBehaviour
             Debug.LogError("Audio Source on Enemy is NULL");
         }
 
-        StartCoroutine(FireLaserRoutine());
+        //StartCoroutine(FireLaserRoutine());
         
     }
 

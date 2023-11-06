@@ -10,12 +10,16 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float _speedboostmult = 2f;
     [SerializeField]
+    private float _thrusterBoost = 2.0f;
+    [SerializeField]
     private float _fireRate = 0.25f;
     private float _canFire = -1f;
     [SerializeField]
     private int _lives = 3;
     [SerializeField]
     private int _score;
+
+    private int _shieldLives;
 
     [SerializeField]
     private GameObject _laserPrefab;
@@ -32,6 +36,7 @@ public class Player : MonoBehaviour
 
     private SpawnManager _spawnManager;
     private UIManager _uiManager;
+    private SpriteRenderer _shieldSpriteRenderer;
 
     [SerializeField]
     private bool _isTripleShotActive = false;
@@ -45,6 +50,13 @@ public class Player : MonoBehaviour
         _spawnManager = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();
         _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
         _audioSource = GetComponent<AudioSource>();
+
+        _shieldSpriteRenderer = GameObject.Find("Shield_Player").GetComponent<SpriteRenderer>();
+
+        if (_shieldSpriteRenderer == null)
+        {
+            Debug.LogError("Shield Renderer is NULL");
+        }
 
         if (_spawnManager == null)
         {
@@ -82,20 +94,25 @@ public class Player : MonoBehaviour
         float verticalInput = Input.GetAxis("Vertical");
 
         Vector3 directioncom = new Vector3(horizontalInput, verticalInput, 0);
-        Vector3 rightwall = new Vector3(11.3f, transform.position.y, 0);
-        Vector3 leftwall = new Vector3(-11.3f, transform.position.y, 0);
 
-        transform.Translate(directioncom * _speed * Time.deltaTime);
+        if(Input.GetKey(KeyCode.LeftShift))
+        {
+            transform.Translate(directioncom * _speed * _thrusterBoost * Time.deltaTime);
+        }
+        else
+        {
+            transform.Translate(directioncom * _speed * Time.deltaTime);
+        }
 
         transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, -5, 2), 0);
        
         if (transform.position.x >= 11.3f)
         {
-            transform.position = leftwall;
+            transform.position = new Vector3(-11.3f, transform.position.y, 0);
         }
         else if (transform.position.x <= -11.3f)
         {
-            transform.position = rightwall;
+            transform.position = new Vector3(11.3f, transform.position.y, 0);
         }
     }
 
@@ -120,8 +137,25 @@ public class Player : MonoBehaviour
 
         if(_isShieldActive == true)
         {
-            _isShieldActive = false;
-            _shieldPlayer.SetActive(false);
+            if(_shieldLives == 3)
+            {
+                _shieldLives--;
+                _shieldSpriteRenderer.color = new Color32(255, 57, 250, 255);
+                Debug.Log("Shield 3-2");
+            }
+            else if (_shieldLives == 2)
+            {
+                _shieldLives--;
+                _shieldSpriteRenderer.color = Color.red;
+                Debug.Log("Shield 2-1");
+            }
+            else if (_shieldLives == 1)
+            {
+                _shieldLives--;
+                Debug.Log("Shield 1-0");
+                _isShieldActive = false;
+                _shieldPlayer.SetActive(false);
+            }
             return;
         }
 
@@ -139,8 +173,8 @@ public class Player : MonoBehaviour
         else if(_lives < 1)
         {
            _spawnManager.OnPlayerDeath();
-            Destroy(this.gameObject);
-            _uiManager.GameOverSequence();
+           Destroy(this.gameObject);
+           _uiManager.GameOverSequence();
         }
     }
 
@@ -173,6 +207,9 @@ public class Player : MonoBehaviour
     {
         _isShieldActive = true;
         _shieldPlayer.SetActive(true);
+        Debug.Log("Shield at 3");
+        _shieldSpriteRenderer.color = Color.white;
+        _shieldLives = 3;
     }
 
     public void AddScore(int points)
