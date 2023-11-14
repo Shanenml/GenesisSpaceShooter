@@ -15,10 +15,11 @@ public class Player : MonoBehaviour
     private float _fireRate = 0.25f;
     private float _canFire = -1f;
     [SerializeField]
+    private float _laserAmmo = 15f;
+    [SerializeField]
     private int _lives = 3;
     [SerializeField]
     private int _score;
-
     private int _shieldLives;
 
     [SerializeField]
@@ -30,9 +31,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     private GameObject _rightEngine, _leftEngine;
 
-    private AudioSource _audioSource;
     [SerializeField]
     private AudioClip _laserSound;
+    private AudioSource _audioSource;
 
     private SpawnManager _spawnManager;
     private UIManager _uiManager;
@@ -57,7 +58,6 @@ public class Player : MonoBehaviour
         {
             Debug.LogError("Shield Renderer is NULL");
         }
-
         if (_spawnManager == null)
         {
             Debug.LogError("Spawn Manager is NULL");
@@ -66,6 +66,7 @@ public class Player : MonoBehaviour
         {
             Debug.LogError("UI Manager is NULL");
         }
+
         if (_audioSource == null)
         {
             Debug.LogError("Audio Source on the Player is NULL");
@@ -80,7 +81,7 @@ public class Player : MonoBehaviour
     {        
         CalculateMovement();
 
-        if (Input.GetKeyDown(KeyCode.Space) && Time.time > _canFire)
+        if (Input.GetKeyDown(KeyCode.Space) && Time.time > _canFire && _laserAmmo >= 1f)
         {
             FireLaser();
         }
@@ -126,6 +127,8 @@ public class Player : MonoBehaviour
         else
         {
             Instantiate(_laserPrefab, transform.position + new Vector3(0, 1.1f, 0), Quaternion.identity);
+            _laserAmmo--;
+            _uiManager.UpdateShots(_laserAmmo);
         }
 
         _audioSource.Play();
