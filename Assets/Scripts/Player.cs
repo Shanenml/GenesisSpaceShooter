@@ -33,6 +33,10 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private AudioClip _laserSound;
+    [SerializeField]
+    private AudioClip _tripleShotSound;
+    [SerializeField]
+    private AudioClip _emptyAmmoSound;
     private AudioSource _audioSource;
 
     private SpawnManager _spawnManager;
@@ -52,12 +56,6 @@ public class Player : MonoBehaviour
         _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
         _audioSource = GetComponent<AudioSource>();
 
-        _shieldSpriteRenderer = GameObject.Find("Shield_Player").GetComponent<SpriteRenderer>();
-
-        if (_shieldSpriteRenderer == null)
-        {
-            Debug.LogError("Shield Renderer is NULL");
-        }
         if (_spawnManager == null)
         {
             Debug.LogError("Spawn Manager is NULL");
@@ -81,11 +79,18 @@ public class Player : MonoBehaviour
     {        
         CalculateMovement();
 
-        if (Input.GetKeyDown(KeyCode.Space) && Time.time > _canFire && _laserAmmo >= 1f)
+        if (Input.GetKeyDown(KeyCode.Space) && Time.time > _canFire)
         {
-            FireLaser();
+            if(_laserAmmo > 0f)
+            {
+                FireLaser();
+            }
+            else
+            {
+                _audioSource.clip = _emptyAmmoSound;
+                _audioSource.Play();
+            }
         }
-
     }
 
 
@@ -124,7 +129,7 @@ public class Player : MonoBehaviour
         {
             Instantiate(_tripleShotPrefab, transform.position, Quaternion.identity);
         }
-        else
+        else if(_isTripleShotActive == false)
         {
             Instantiate(_laserPrefab, transform.position + new Vector3(0, 1.1f, 0), Quaternion.identity);
             _laserAmmo--;
@@ -184,6 +189,7 @@ public class Player : MonoBehaviour
     public void TripleShotActive()
     {
         _isTripleShotActive = true;
+        _audioSource.clip = _tripleShotSound;
         StartCoroutine(TripleShotPowerDownRoutine());
     }
 
@@ -192,6 +198,7 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(5.0f);
         _isTripleShotActive = false;
+        _audioSource.clip = _laserSound;
     }
  
     public void SpeedBoostActive()
@@ -211,6 +218,14 @@ public class Player : MonoBehaviour
         _isShieldActive = true;
         _shieldPlayer.SetActive(true);
         Debug.Log("Shield at 3");
+
+        _shieldSpriteRenderer = _shieldPlayer.GetComponent<SpriteRenderer>();
+
+        if (_shieldSpriteRenderer == null)
+        {
+            Debug.LogError("Shield Renderer is NULL");
+        }
+
         _shieldSpriteRenderer.color = Color.white;
         _shieldLives = 3;
     }

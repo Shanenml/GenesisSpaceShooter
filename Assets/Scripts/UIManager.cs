@@ -57,8 +57,19 @@ public class UIManager : MonoBehaviour
     public void UpdateShots(float currentShots)
     {
         _shotsText.text = "Ammo: " + currentShots;
-        _shotsText.color = new Color(1.0f, (0.6f * currentShots), 0.0f);
-
+        if(currentShots >= 10)
+        {
+            _shotsText.color = Color.green;
+        }
+        else if(currentShots < 10 && currentShots > 5)
+        {
+            _shotsText.color = Color.yellow;
+        }
+        else if(currentShots <=5)
+        {
+            _shotsText.color = Color.red;
+        }
+        
     }
 
     public void GameOverSequence()

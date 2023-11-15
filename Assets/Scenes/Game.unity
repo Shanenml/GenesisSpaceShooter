@@ -660,7 +660,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &616040845
 GameObject:
@@ -781,7 +781,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 5b17a0088dcdf924fa92da5af1e1be07, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 26364aaf1f64b40c1a047b0bacfbd10e, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.751
   m_Pitch: 1
@@ -1754,7 +1754,9 @@ MonoBehaviour:
   _shieldPlayer: {fileID: 1607269262}
   _rightEngine: {fileID: 186428788}
   _leftEngine: {fileID: 965475076}
-  _laserSound: {fileID: 8300000, guid: 75676f361bdfeaf41a46623e95df3dbc, type: 3}
+  _laserSound: {fileID: 8300000, guid: 5207b2a445fcb144281ab5395fe95c1d, type: 3}
+  _tripleShotSound: {fileID: 8300000, guid: 97b5820b1e079ab4bbbe90e89bd4db5d, type: 3}
+  _emptyAmmoSound: {fileID: 8300000, guid: 8f268095f67575b44b10ea19a4482b2c, type: 3}
   _isTripleShotActive: 0
   _isShieldActive: 0
 --- !u!212 &1758724199
@@ -1967,7 +1969,7 @@ PrefabInstance:
     - target: {fileID: 8213926213916692219, guid: 59d5df3f5dfecd64f9895f1fa13328f3,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8213926213916692219, guid: 59d5df3f5dfecd64f9895f1fa13328f3,
         type: 3}
@@ -2063,5 +2065,5 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
