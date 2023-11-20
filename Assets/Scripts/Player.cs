@@ -140,6 +140,28 @@ public class Player : MonoBehaviour
 
     }
 
+    public void Reload()
+    {
+        _laserAmmo = 15f;
+        _uiManager.UpdateShots(_laserAmmo);
+    }
+
+    public void Heal()
+    {
+        _lives++;
+        _uiManager.UpdateLives(_lives);
+
+        if(_lives == 3)
+        {
+            _rightEngine.SetActive(false);
+            _leftEngine.SetActive(false);
+        }
+        if(_lives == 2)
+        {
+            _leftEngine.SetActive(false);
+        }
+    }
+
     public void Damage()
     {
 

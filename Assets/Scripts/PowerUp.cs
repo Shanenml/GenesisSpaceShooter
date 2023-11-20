@@ -11,6 +11,8 @@ public class PowerUp : MonoBehaviour
     //0 = Triple Shot
     //1 = Speed
     //2 = Shields
+    //3 = Ammo
+    //4 = Health
     [SerializeField]
     private AudioClip _powerupSound;
 
@@ -45,6 +47,12 @@ public class PowerUp : MonoBehaviour
                     break;
                 case 2:
                     player.ShieldActive();
+                    break;
+                case 3:
+                    player.Reload();
+                    break;
+                case 4:
+                    player.Heal();
                     break;
                 default:
                     Debug.Log("Default case");

@@ -26,6 +26,8 @@ public class SpawnManager : MonoBehaviour
     {
         StartCoroutine(SpawnEnemyRoutine());
         StartCoroutine(SpawnPowerUpRoutine());
+        StartCoroutine(SpawnAmmoRoutine());
+        StartCoroutine(SpawnHealthRoutine());
     }
     IEnumerator SpawnEnemyRoutine()
     {
@@ -51,6 +53,29 @@ public class SpawnManager : MonoBehaviour
             int randompowerup = Random.Range(0, 3);
             Instantiate(powerup[randompowerup], posToSpawn, Quaternion.identity);
             yield return new WaitForSeconds(Random.Range(10f, 20f));
+        }
+    }
+
+    IEnumerator SpawnAmmoRoutine()
+    {
+
+        yield return new WaitForSeconds(5f);
+        while (_PlayerAlive == true)
+        {
+            Vector3 posToSpawn = new Vector3(Random.Range(-8f, 8f), 7, 0);
+            Instantiate(powerup[3], posToSpawn, Quaternion.identity);
+            yield return new WaitForSeconds(Random.Range(5f, 10f));
+        }
+    }
+
+    IEnumerator SpawnHealthRoutine()
+    {
+        yield return new WaitForSeconds(10f);
+        while (_PlayerAlive == true)
+        {
+            Vector3 posToSpawn = new Vector3(Random.Range(-8f, 8f), 7, 0);
+            Instantiate(powerup[4], posToSpawn, Quaternion.identity);
+            yield return new WaitForSeconds(Random.Range(20f, 30f));
         }
     }
 
