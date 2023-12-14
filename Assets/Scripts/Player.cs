@@ -60,6 +60,11 @@ public class Player : MonoBehaviour
         {
             Debug.LogError("Spawn Manager is NULL");
         }
+        else
+        {
+            _spawnManager.UpdateLives(_lives);
+        }
+
         if (_uiManager == null)
         {
             Debug.LogError("UI Manager is NULL");
@@ -150,6 +155,7 @@ public class Player : MonoBehaviour
     {
         _lives++;
         _uiManager.UpdateLives(_lives);
+        _spawnManager.UpdateLives(_lives);
 
         if(_lives == 3)
         {
@@ -191,6 +197,7 @@ public class Player : MonoBehaviour
 
         _lives--;
         _uiManager.UpdateLives(_lives);
+        _spawnManager.UpdateLives(_lives);
 
         if(_lives == 2)
         {

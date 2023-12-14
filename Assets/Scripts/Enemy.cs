@@ -70,6 +70,7 @@ public class Enemy : MonoBehaviour
         if(other.tag == "Laser")
         {
            Destroy(other.gameObject);
+           StopAllCoroutines();
 
            if (_player != null)
            {

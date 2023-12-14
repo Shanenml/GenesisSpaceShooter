@@ -12,6 +12,7 @@ public class SpawnManager : MonoBehaviour
     private GameObject _enemyContainer;
 
     private bool _PlayerAlive = true;
+    private int _PlayersLives;
 
     void Start()
     {
@@ -26,8 +27,7 @@ public class SpawnManager : MonoBehaviour
     {
         StartCoroutine(SpawnEnemyRoutine());
         StartCoroutine(SpawnPowerUpRoutine());
-        StartCoroutine(SpawnAmmoRoutine());
-        StartCoroutine(SpawnHealthRoutine());
+        StartCoroutine(SpawnRefillablesRoutine());
     }
     IEnumerator SpawnEnemyRoutine()
     {
@@ -52,19 +52,32 @@ public class SpawnManager : MonoBehaviour
             Vector3 posToSpawn = new Vector3(Random.Range(-8f, 8f), 7, 0);
             int randompowerup = Random.Range(0, 3);
             Instantiate(powerup[randompowerup], posToSpawn, Quaternion.identity);
+            Debug.LogError("Power Up Spawn" + randompowerup);
             yield return new WaitForSeconds(Random.Range(10f, 20f));
         }
     }
 
-    IEnumerator SpawnAmmoRoutine()
+    IEnumerator SpawnRefillablesRoutine()
     {
 
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(10f);
         while (_PlayerAlive == true)
         {
             Vector3 posToSpawn = new Vector3(Random.Range(-8f, 8f), 7, 0);
-            Instantiate(powerup[3], posToSpawn, Quaternion.identity);
-            yield return new WaitForSeconds(Random.Range(5f, 10f));
+            if(_PlayersLives < 3)
+            {
+                //spawn Health Collectable
+                Instantiate(powerup[4], posToSpawn, Quaternion.identity);
+                Debug.LogError("Health Pack Spawned");
+            }
+            else
+            {
+                //spawn Ammo Collectable
+                Instantiate(powerup[3], posToSpawn, Quaternion.identity);
+                Debug.LogError("Ammo Pack Spawned");
+            }
+            
+            yield return new WaitForSeconds(Random.Range(10f, 20f));
         }
     }
 
@@ -82,6 +95,11 @@ public class SpawnManager : MonoBehaviour
     public void OnPlayerDeath()
     {
         _PlayerAlive = false;
+    }
+
+    public void UpdateLives(int PlayersLives)
+    {
+        _PlayersLives = PlayersLives;
     }
    
 }
