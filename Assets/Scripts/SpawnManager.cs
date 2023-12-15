@@ -81,17 +81,6 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    IEnumerator SpawnHealthRoutine()
-    {
-        yield return new WaitForSeconds(10f);
-        while (_PlayerAlive == true)
-        {
-            Vector3 posToSpawn = new Vector3(Random.Range(-8f, 8f), 7, 0);
-            Instantiate(powerup[4], posToSpawn, Quaternion.identity);
-            yield return new WaitForSeconds(Random.Range(20f, 30f));
-        }
-    }
-
     public void OnPlayerDeath()
     {
         _PlayerAlive = false;
