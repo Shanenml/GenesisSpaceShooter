@@ -57,6 +57,18 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
+    IEnumerator SpawnRatePowerUpRoutine()
+    {
+        yield return new WaitForSeconds(20f);
+        while (_PlayerAlive == true)
+        {
+            Vector3 postToSpawn = new Vector3(Random.Range(-8f, 8f), 7, 0);
+            Instantiate(powerup[5], postToSpawn, Quaternion.identity);
+            Debug.LogError("Rare Power Up Spawn");
+            yield return new WaitForSeconds(Random.Range(20f, 30f));
+        }
+    }
+
     IEnumerator SpawnRefillablesRoutine()
     {
 
@@ -77,7 +89,7 @@ public class SpawnManager : MonoBehaviour
                 Debug.LogError("Ammo Pack Spawned");
             }
             
-            yield return new WaitForSeconds(Random.Range(10f, 20f));
+            yield return new WaitForSeconds(Random.Range(15f, 20f));
         }
     }
 

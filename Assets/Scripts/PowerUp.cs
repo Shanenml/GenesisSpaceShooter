@@ -54,6 +54,9 @@ public class PowerUp : MonoBehaviour
                 case 4:
                     player.Heal();
                     break;
+                case 5:
+                    player._shieldPulseAmmo++;
+                    break;
                 default:
                     Debug.Log("Default case");
                     break;

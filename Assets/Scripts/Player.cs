@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
     private float _canFire = -1f;
     [SerializeField]
     private float _laserAmmo = 15f;
+    public float _shieldPulseAmmo = 0f;
     [SerializeField]
     private int _lives = 3;
     [SerializeField]
@@ -28,6 +29,8 @@ public class Player : MonoBehaviour
     private GameObject _tripleShotPrefab;
     [SerializeField]
     private GameObject _shieldPlayer;
+    [SerializeField]
+    private GameObject _shieldPulsePrefab;
     [SerializeField]
     private GameObject _rightEngine, _leftEngine;
 
@@ -96,6 +99,12 @@ public class Player : MonoBehaviour
                 _audioSource.Play();
             }
         }
+
+        if(Input.GetKeyDown(KeyCode.R) && _shieldPulseAmmo > 0f)
+        {
+            ShieldPulse();
+        }
+
     }
 
 
@@ -166,6 +175,12 @@ public class Player : MonoBehaviour
         {
             _leftEngine.SetActive(false);
         }
+    }
+
+    public void ShieldPulse()
+    {
+        Instantiate(_shieldPulsePrefab, transform.position, Quaternion.identity);
+        _shieldPulseAmmo--; 
     }
 
     public void Damage()
