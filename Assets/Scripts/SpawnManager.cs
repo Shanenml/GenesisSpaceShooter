@@ -28,6 +28,7 @@ public class SpawnManager : MonoBehaviour
         StartCoroutine(SpawnEnemyRoutine());
         StartCoroutine(SpawnPowerUpRoutine());
         StartCoroutine(SpawnRefillablesRoutine());
+        StartCoroutine(SpawnRarePowerUpRoutine());
     }
     IEnumerator SpawnEnemyRoutine()
     {
@@ -57,7 +58,7 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    IEnumerator SpawnRatePowerUpRoutine()
+    IEnumerator SpawnRarePowerUpRoutine()
     {
         yield return new WaitForSeconds(20f);
         while (_PlayerAlive == true)
