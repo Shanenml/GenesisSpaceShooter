@@ -180,7 +180,8 @@ public class Player : MonoBehaviour
     public void ShieldPulse()
     {
         Instantiate(_shieldPulsePrefab, transform.position, Quaternion.identity);
-        _shieldPulseAmmo--; 
+        _shieldPulseAmmo--;
+        _uiManager.UpdateShieldPulse(_shieldPulseAmmo);
     }
 
     public void Damage()

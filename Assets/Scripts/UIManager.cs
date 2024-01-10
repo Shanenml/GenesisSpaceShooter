@@ -15,6 +15,8 @@ public class UIManager : MonoBehaviour
  
     [SerializeField]
     private Text _shotsText;
+    [SerializeField]
+    private Text _shieldPulseText;
 
     [SerializeField]
     private Image _LivesImg;
@@ -70,6 +72,11 @@ public class UIManager : MonoBehaviour
             _shotsText.color = Color.red;
         }
         
+    }
+
+    public void UpdateShieldPulse(float shieldPulseShots)
+    {
+        _shieldPulseText.text = "Shield Pulse: " + shieldPulseShots;
     }
 
     public void GameOverSequence()

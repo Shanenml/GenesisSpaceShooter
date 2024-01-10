@@ -16,9 +16,16 @@ public class PowerUp : MonoBehaviour
     [SerializeField]
     private AudioClip _powerupSound;
 
+    private UIManager _uiManager;
+
     void Start()
     {
+        _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
 
+        if(_uiManager == null)
+        {
+            Debug.LogError("UI Manager is NULL");
+        }
     }
 
     void Update()
@@ -56,6 +63,7 @@ public class PowerUp : MonoBehaviour
                     break;
                 case 5:
                     player._shieldPulseAmmo++;
+                    _uiManager.UpdateShieldPulse(player._shieldPulseAmmo);
                     break;
                 default:
                     Debug.Log("Default case");

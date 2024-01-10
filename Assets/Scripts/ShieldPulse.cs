@@ -5,8 +5,6 @@ using UnityEngine;
 public class ShieldPulse : MonoBehaviour
 {
     [SerializeField]
-    private float _expandingSpeed = 1f;
-    [SerializeField]
     private AudioClip _deleteTarget;
     private AudioSource _audiosource;
 
@@ -36,7 +34,7 @@ public class ShieldPulse : MonoBehaviour
 
     IEnumerator ShieldPulsePowerdown()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
         Destroy(this.gameObject);
     }
 
