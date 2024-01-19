@@ -86,6 +86,7 @@ public class Player : MonoBehaviour
     void Update()
     {        
         CalculateMovement();
+        
 
         if (Input.GetKeyDown(KeyCode.Space) && Time.time > _canFire)
         {
@@ -115,11 +116,18 @@ public class Player : MonoBehaviour
 
         Vector3 directioncom = new Vector3(horizontalInput, verticalInput, 0);
 
-        if(Input.GetKey(KeyCode.LeftShift))
+        if(Input.GetKey(KeyCode.LeftShift)) //thruster boost being used
         {
             transform.Translate(directioncom * _speed * _thrusterBoost * Time.deltaTime);
+            _uiManager.UpdateThrusterBoost(true);
+            Debug.Log("Thruster On");
         }
-        else
+        if(Input.GetKeyUp(KeyCode.LeftShift)) //thruster boost let go
+        {
+            _uiManager.UpdateThrusterBoost(false);
+            Debug.Log("Thruster Off");
+        }
+        else //not thruster movement
         {
             transform.Translate(directioncom * _speed * Time.deltaTime);
         }

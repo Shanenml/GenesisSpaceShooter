@@ -19,6 +19,9 @@ public class UIManager : MonoBehaviour
     private Text _shieldPulseText;
 
     [SerializeField]
+    private Slider _thrusterBoostSlider;
+
+    [SerializeField]
     private Image _LivesImg;
     [SerializeField]
     private Sprite[] _liveSprites;
@@ -30,6 +33,7 @@ public class UIManager : MonoBehaviour
     {
         _scoreText.text = "Score: " + 0;
         _shotsText.text = "Ammo: " + 15;
+        _thrusterBoostSlider.value = 1;
         _gameoverText.gameObject.SetActive(false);
         _gameManager = GameObject.Find("Game_Manager").GetComponent<GameManager>();
         _shotsText.GetComponent<Text>();
@@ -46,6 +50,19 @@ public class UIManager : MonoBehaviour
 
     }
 
+    public void UpdateThrusterBoost(bool thrusterstatus)
+    {
+        if(thrusterstatus)
+        {
+            //decrease slider
+            _thrusterBoostSlider.value -= 0.01f;
+        }
+        else
+        {
+            _thrusterBoostSlider.value += 0.1f;
+            //refill slider
+        }
+    }
     public void UpdateScore(int playerScore)
     {
         _scoreText.text = "Score: " + playerScore;
