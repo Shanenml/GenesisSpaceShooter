@@ -265,6 +265,7 @@ GameObject:
   - component: {fileID: 113827050}
   - component: {fileID: 113827049}
   - component: {fileID: 113827052}
+  - component: {fileID: 113827053}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -397,6 +398,25 @@ MonoBehaviour:
   m_BeforeTransparentBundles: []
   m_BeforeStackBundles: []
   m_AfterStackBundles: []
+--- !u!95 &113827053
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 113827048}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c182a33114d5cd24086aa8549cbac3b0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &186428788
 GameObject:
   m_ObjectHideFlags: 0
@@ -1508,7 +1528,7 @@ Transform:
   m_LocalScale: {x: 1.0848992, y: 1.0965961, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1552604721
 GameObject:
@@ -1937,7 +1957,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 5
   _speedboostmult: 2
-  _thrusterBoost: 2
+  _thrusterBoostSpeed: 2
+  _thrustBoostValue: 1
   _fireRate: 0.2
   _laserAmmo: 15
   _shieldPulseAmmo: 0
@@ -2015,7 +2036,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1758724197}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.23, y: -2.56, z: 0}
+  m_LocalPosition: {x: -0.08, y: -3.27, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 1607269264}
@@ -2167,7 +2188,7 @@ PrefabInstance:
     - target: {fileID: 8213926213916692219, guid: 59d5df3f5dfecd64f9895f1fa13328f3,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8213926213916692219, guid: 59d5df3f5dfecd64f9895f1fa13328f3,
         type: 3}

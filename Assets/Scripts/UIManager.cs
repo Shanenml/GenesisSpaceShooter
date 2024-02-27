@@ -47,22 +47,14 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+  
     }
 
-    public void UpdateThrusterBoost(bool thrusterstatus)
+    public void UpdateThrusterBoost(float thrustvalue)
     {
-        if(thrusterstatus)
-        {
-            //decrease slider
-            _thrusterBoostSlider.value -= 0.01f;
-        }
-        else
-        {
-            _thrusterBoostSlider.value += 0.1f;
-            //refill slider
-        }
+        _thrusterBoostSlider.value = thrustvalue;
     }
+
     public void UpdateScore(int playerScore)
     {
         _scoreText.text = "Score: " + playerScore;

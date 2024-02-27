@@ -10,7 +10,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float _speedboostmult = 2f;
     [SerializeField]
-    private float _thrusterBoost = 2.0f;
+    private float _thrusterBoostSpeed = 2.0f;
+    [SerializeField]
+    private float _thrustBoostValue = 1.0f;
     [SerializeField]
     private float _fireRate = 0.25f;
     private float _canFire = -1f;
@@ -45,6 +47,7 @@ public class Player : MonoBehaviour
     private SpawnManager _spawnManager;
     private UIManager _uiManager;
     private SpriteRenderer _shieldSpriteRenderer;
+    private Animator _cameraAnimator;
 
     [SerializeField]
     private bool _isTripleShotActive = false;
@@ -58,6 +61,8 @@ public class Player : MonoBehaviour
         _spawnManager = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();
         _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
         _audioSource = GetComponent<AudioSource>();
+        _cameraAnimator = GameObject.Find("Main Camera").GetComponent<Animator>();
+
 
         if (_spawnManager == null)
         {
@@ -80,6 +85,11 @@ public class Player : MonoBehaviour
         else
         {
             _audioSource.clip = _laserSound;
+        }
+
+        if (_cameraAnimator == null)
+        {
+            Debug.LogError("Camera Animator is NULL");
         }
     }
 
@@ -116,15 +126,17 @@ public class Player : MonoBehaviour
 
         Vector3 directioncom = new Vector3(horizontalInput, verticalInput, 0);
 
-        if(Input.GetKey(KeyCode.LeftShift)) //thruster boost being used
+        if(Input.GetKey(KeyCode.LeftShift) && _thrustBoostValue > 0) //thruster boost being used
         {
-            transform.Translate(directioncom * _speed * _thrusterBoost * Time.deltaTime);
-            _uiManager.UpdateThrusterBoost(true);
+            transform.Translate(directioncom * _speed * _thrusterBoostSpeed * Time.deltaTime);
+            StopCoroutine(ThrusterBoostRechargeRoutine());
+            _thrustBoostValue -= 0.01f;
+            _uiManager.UpdateThrusterBoost(_thrustBoostValue);
             Debug.Log("Thruster On");
         }
         if(Input.GetKeyUp(KeyCode.LeftShift)) //thruster boost let go
         {
-            _uiManager.UpdateThrusterBoost(false);
+            StartCoroutine(ThrusterBoostRechargeRoutine());
             Debug.Log("Thruster Off");
         }
         else //not thruster movement
@@ -144,6 +156,21 @@ public class Player : MonoBehaviour
         }
     }
 
+    IEnumerator ThrusterBoostRechargeRoutine()
+    {
+        yield return new WaitForSeconds(2.0f);
+        while(_thrustBoostValue < 1.0f)
+        {
+            _thrustBoostValue += 0.1f;
+            if (_thrustBoostValue >= 1.0f)
+            {
+                _thrustBoostValue = 1.0f;
+            }
+            _uiManager.UpdateThrusterBoost(_thrustBoostValue);
+            yield return new WaitForSeconds(0.5f);
+            
+        }
+    }
     void FireLaser()
     {
         _canFire = Time.time + _fireRate;
@@ -222,6 +249,7 @@ public class Player : MonoBehaviour
         _lives--;
         _uiManager.UpdateLives(_lives);
         _spawnManager.UpdateLives(_lives);
+        _cameraAnimator.SetTrigger("OnPlayerDamage");
 
         if(_lives == 2)
         {
